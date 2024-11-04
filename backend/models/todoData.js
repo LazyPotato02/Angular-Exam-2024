@@ -1,5 +1,4 @@
-import mongoose from 'mongoose';
-
+const mongoose = require('mongoose');
 
 const todoSchema = mongoose.Schema({
     name: { type: String, required: true },
@@ -8,5 +7,5 @@ const todoSchema = mongoose.Schema({
     owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 })
 
-export const todoData = mongoose.model('todoData',todoSchema)
+const todoData = mongoose.model('todo_Data',todoSchema)
 module.exports = todoData

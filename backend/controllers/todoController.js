@@ -1,4 +1,4 @@
-import {todoData as TodoData} from '../models/todoData'
+const TodoData = require('../models/todoData')
 
 const createTodo = async (req, res) => {
     const todo = new TodoData(req.body)
@@ -12,4 +12,6 @@ const createTodo = async (req, res) => {
 }
 
 
-export {createTodo}
+module.exports = {
+    createTodo
+}

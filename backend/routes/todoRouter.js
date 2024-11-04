@@ -1,11 +1,9 @@
-import express from 'express'
-import {createTodo} from "../controllers/todoController";
+const express = require("express");
+const todoController = require("../controllers/todoController.js");
+const todoRouter = express.Router();
 
-
-const todoRouter = express.Router()
-
-todoRouter.post('/',createTodo)
+todoRouter.post('/',todoController.createTodo)
 
 
 
-export default todoRouter
+module.exports = todoRouter

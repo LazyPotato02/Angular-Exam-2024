@@ -1,14 +1,15 @@
-import express from "express";
-import mongoose from "mongoose";
-import cookieParser from "cookie-parser";
-import cors from "cors";
-import helmet from "helmet";
-import todoRouter from "./routes/todoRouter";
+const express = require('express');
+const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
+const helmet = require('helmet')
+const todoRouter = require("./routes/todoRouter");
 
+const url = "mongodb://10.70.71.110:27017/todo-app";
 
 const app = express();
 
-const url = "mongodb://10.70.71.110:27017/todo-app";
+
 
 app.use(helmet());
 
@@ -31,6 +32,7 @@ mongoose.connect(url, {})
     });
 
 app.use('/todo',todoRouter)
+
 
 const port = 8000;
 app.listen(port, () => {
