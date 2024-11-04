@@ -8,5 +8,5 @@ const todoSchema = mongoose.Schema({
     owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 })
 
-const todoData = mongoose.model('todoData',todoSchema)
+export const todoData = mongoose.model('todoData',todoSchema)
 module.exports = todoData
