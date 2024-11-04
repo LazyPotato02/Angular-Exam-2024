@@ -12,7 +12,4 @@ const createTodo = async (req, res) => {
 }
 
 
-
-module.exports ={
-    createTodo
-}
+export {createTodo}

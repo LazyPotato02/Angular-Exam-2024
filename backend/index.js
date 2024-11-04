@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import helmet from "helmet";
+import todoRouter from "./routes/todoRouter";
 
 
 const app = express();
@@ -29,7 +30,7 @@ mongoose.connect(url, {})
         console.error('Database connection error:', error);
     });
 
-// app.use('/example',exampleRouter)
+app.use('/todo',todoRouter)
 
 const port = 8000;
 app.listen(port, () => {
