@@ -1,9 +1,11 @@
-const express = require('express');
-const mongoose = require('mongoose');
+import express from "express";
+import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import helmet from "helmet";
+
+
 const app = express();
-const cookieParser = require('cookie-parser');
-const cors = require('cors');
-const helmet = require('helmet');
 
 const url = "mongodb://10.70.71.110:27017/todo-app";
 
