@@ -11,6 +11,12 @@ const createTodo = async (req, res) => {
     }
 }
 
+// TODO : Make controllers for:
+
+// get single todo
+// get all user todos
+// edit todo
+// delete todo
 
 module.exports = {
     createTodo
