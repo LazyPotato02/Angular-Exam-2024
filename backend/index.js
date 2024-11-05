@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const helmet = require('helmet')
 const todoRouter = require("./routes/todoRouter");
+const userRoutes = require("./routes/userRouter");
 
 const url = "mongodb://10.70.71.110:27017/todo-app";
 
@@ -32,7 +33,7 @@ mongoose.connect(url, {})
     });
 
 app.use('/todo',todoRouter)
-
+app.use('/users', userRoutes)
 
 const port = 8000;
 app.listen(port, () => {
