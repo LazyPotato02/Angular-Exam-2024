@@ -11,6 +11,17 @@ const createTodo = async (req, res) => {
     }
 }
 
+const getSingleTodo = async (req, res) => {
+    const todoId = req.params.id
+    try {
+        const todo = await TodoData.findById(todoId)
+        res.status(201).json(todo)
+    } catch (error) {
+        res.status(400).json({message: error.message});
+    }
+}
+
+
 // TODO : Make controllers for:
 
 // get single todo
@@ -19,5 +30,6 @@ const createTodo = async (req, res) => {
 // delete todo
 
 module.exports = {
-    createTodo
+    createTodo,
+    getSingleTodo
 }
