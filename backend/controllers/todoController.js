@@ -7,21 +7,17 @@ const createTodo = async (req, res) => {
 
     try {
 
-        const sessionId = req.cookies['session-id']
+        const sessionId = req.cookies['session-id'];
         if (!sessionId) {
             return res.status(401).send('Session not found');
         }
 
-        const sessionData = await sessionSchema.findOne({
-            'sessionId': `${sessionId}`
-        });
-
+        const sessionData = await sessionSchema.findOne({sessionId});
         if (!sessionData) {
             return res.status(401).send('Invalid session');
         }
-        const sessionInfo = JSON.parse(sessionData.session)
-        const userId = sessionInfo.userId
 
+        const userId = sessionData.userId;
 
         if (!userId) {
             return res.status(401).send('User not authenticated');
@@ -51,13 +47,35 @@ const getSingleTodo = async (req, res) => {
     }
 }
 
-const getSingleAllOwnerTodos = async (req, res) => {
+const getAllOwnerTodos = async (req, res) => {
 
+    try {
+        const sessionId = req.cookies['session-id'];
+        if (!sessionId) {
+            return res.status(401).send('Session not found');
+        }
+
+        const sessionData = await sessionSchema.findOne({sessionId});
+        if (!sessionData) {
+            return res.status(401).send('Invalid session');
+        }
+
+        const userId = sessionData.userId;
+
+        if (!userId) {
+            return res.status(401).send('User not authenticated');
+        }
+
+
+        const todos = await TodoData.find({owner: userId})
+        res.status(200).json(todos)
+    } catch (err) {
+        res.status(400).json({message: err.message})
+    }
 }
 
 // TODO : Make controllers for:
 
-// get single todo
 // get all user todos
 // edit todo
 // delete todo
@@ -65,5 +83,5 @@ const getSingleAllOwnerTodos = async (req, res) => {
 module.exports = {
     createTodo,
     getSingleTodo,
-    getSingleAllOwnerTodos
+    getAllOwnerTodos
 }
