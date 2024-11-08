@@ -1,87 +1,87 @@
 const TodoData = require('../models/todoData')
-const sessionSchema = require('../models/sessions')
-const todoData = require("../models/todoData");
 const createTodo = async (req, res) => {
-    const todo = new TodoData(req.body)
-
-
     try {
-
-        const sessionId = req.cookies['session-id'];
-        if (!sessionId) {
-            return res.status(401).send('Session not found');
-        }
-
-        const sessionData = await sessionSchema.findOne({sessionId});
-        if (!sessionData) {
-            return res.status(401).send('Invalid session');
-        }
-
-        const userId = sessionData.userId;
-
-        if (!userId) {
-            return res.status(401).send('User not authenticated');
-        }
-
-
-        const newTodo = new todoData({
+        const newTodo = new TodoData({
             name: req.body.name,
             description: req.body.description,
             done: req.body.done || false,
-            owner: userId
+            owner: req.user._id
         });
         await newTodo.save();
         res.status(201).json(newTodo);
     } catch (err) {
-        res.status(400).json({message: err.message})
+        res.status(400).json({ message: err.message });
     }
-}
+};
 
 const getSingleTodo = async (req, res) => {
-    const todoId = req.params.id
+    const todoId = req.params.id;
     try {
-        const todo = await TodoData.findById(todoId)
-        res.status(201).json(todo)
+        const todo = await TodoData.findOne({ _id: todoId, owner: req.user._id });
+        if (!todo) {
+            return res.status(404).send('Todo not found or user not authorized');
+        }
+
+        res.status(200).json(todo);
     } catch (error) {
-        res.status(400).json({message: error.message});
+        res.status(400).json({ message: error.message });
     }
-}
+};
 
 const getAllOwnerTodos = async (req, res) => {
-
     try {
-        const sessionId = req.cookies['session-id'];
-        if (!sessionId) {
-            return res.status(401).send('Session not found');
-        }
-
-        const sessionData = await sessionSchema.findOne({sessionId});
-        if (!sessionData) {
-            return res.status(401).send('Invalid session');
-        }
-
-        const userId = sessionData.userId;
-
-        if (!userId) {
-            return res.status(401).send('User not authenticated');
-        }
-
-
-        const todos = await TodoData.find({owner: userId})
-        res.status(200).json(todos)
+        const todos = await TodoData.find({ owner: req.user._id });
+        res.status(200).json(todos);
     } catch (err) {
-        res.status(400).json({message: err.message})
+        res.status(400).json({ message: err.message });
     }
-}
+};
+
+const updateTodo = async (req, res) => {
+    try {
+        const todo = await TodoData.findOne({ _id: req.params.id, owner: req.user._id });
+        if (!todo) {
+            return res.status(404).send('Todo not found or user not authorized');
+        }
+
+        const updatedTodo = await TodoData.findByIdAndUpdate(
+            req.params.id,
+            { $set: req.body },
+            { new: true, runValidators: true }
+        );
+
+        res.status(200).json(updatedTodo);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+};
+
+const deleteTodo = async (req, res) => {
+    try {
+        const todo = await TodoData.findOne({ _id: req.params.id, owner: req.user._id });
+        if (!todo) {
+            return res.status(404).send('Todo not found or user not authorized');
+        }
+
+        await TodoData.findByIdAndDelete(req.params.id);
+
+        res.status(200).send('Todo deleted successfully');
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+};
+
+
 
 // TODO : Make controllers for:
 
-// get all user todos
 // edit todo
 // delete todo
 
 module.exports = {
     createTodo,
     getSingleTodo,
-    getAllOwnerTodos
+    getAllOwnerTodos,
+    updateTodo,
+    deleteTodo
 }

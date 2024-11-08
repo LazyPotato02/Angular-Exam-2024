@@ -5,6 +5,7 @@ const cors = require('cors');
 const helmet = require('helmet')
 const todoRouter = require("./routes/todoRouter");
 const userRoutes = require("./routes/userRouter");
+const authenticateSession = require('./middlewares/authSession');
 
 const url = "mongodb://10.70.71.110:27017/todo-app";
 
@@ -32,7 +33,7 @@ mongoose.connect(url, {})
         console.error('Database connection error:', error);
     });
 
-app.use('/todo',todoRouter)
+app.use('/todo',authenticateSession,todoRouter)
 app.use('/users', userRoutes)
 
 const port = 8000;
