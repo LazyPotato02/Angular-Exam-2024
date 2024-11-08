@@ -72,12 +72,6 @@ const deleteTodo = async (req, res) => {
 };
 
 
-
-// TODO : Make controllers for:
-
-// edit todo
-// delete todo
-
 module.exports = {
     createTodo,
     getSingleTodo,
