@@ -4,6 +4,7 @@ const todoRouter = express.Router();
 
 todoRouter.post('/',todoController.createTodo)
 todoRouter.get('/:id',todoController.getSingleTodo)
+todoRouter.get('/',todoController.getSingleAllOwnerTodos)
 
 
 

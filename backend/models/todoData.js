@@ -4,7 +4,7 @@ const todoSchema = mongoose.Schema({
     name: { type: String, required: true },
     description: { type: String, required: true },
     done: { type: Boolean, default: false },
-    owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    owner: { type: mongoose.Schema.Types.ObjectId, ref: 'userData' },
 })
 
 const todoData = mongoose.model('todo_Data',todoSchema)
