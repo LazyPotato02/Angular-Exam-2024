@@ -14,10 +14,17 @@ const app = express();
 
 
 app.use(helmet());
+const allowedOrigins = ['http://localhost:4200']
 
 app.use(cors({
-    origin: 'http://localhost:5173',
-    credentials: true,
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true, // Allow credentials (cookies) to be sent
 }));
 
 app.use(express.json());
