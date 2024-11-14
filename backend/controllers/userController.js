@@ -98,7 +98,17 @@ const loginUser = async (req, res) => {
         res.status(500).json({message: error.message});
     }
 };
+const checkSession = async (req,res) =>{
+    if (req.cookies['session-id']) {
+        // Here, you would typically check if the session is valid, e.g., by querying your session store
+        const sessionIsValid = true; // Replace with actual session validation logic
 
+        if (sessionIsValid) {
+            return res.status(200).json({ loggedIn: true });
+        }
+    }
+    return res.status(200).json({ loggedIn: false });
+}
 const logoutUser = async (req, res) => {
     const sessionId = req.cookies['session-id']
 
@@ -109,8 +119,8 @@ const logoutUser = async (req, res) => {
 
         res.clearCookie('session-id', {
             httpOnly: true,
-            secure: false, // Change to true if you are using HTTPS in production
-            sameSite: 'None',
+            secure: false, // Required for SameSite=None; ensure HTTPS in production
+            sameSite: 'Strict',
         });
 
         res.status(200).json({ message: 'Logged out successfully' });

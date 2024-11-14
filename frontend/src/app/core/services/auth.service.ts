@@ -39,7 +39,7 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/users/login`, credentials, { withCredentials: true }).pipe(
       tap(() => {
         this.loggedInSubject.next(true);
-        this.router.navigate(['/']); 
+        this.router.navigate(['/']);
       }),
       catchError((error) => {
         console.error('Login failed:', error);
