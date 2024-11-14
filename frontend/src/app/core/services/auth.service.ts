@@ -5,8 +5,6 @@ import {Router} from '@angular/router';
 import {LoginData, RegisterData} from './auth.types';
 
 
-// TODO take interfaces to another files
-
 
 @Injectable({
   providedIn: 'root',
