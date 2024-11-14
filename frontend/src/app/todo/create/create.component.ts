@@ -1,12 +1,40 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {TodoService} from '../todo.service';
+import {Todo} from '../todo.types';
+import {NgIf} from '@angular/common';
 
 @Component({
-  selector: 'app-create',
+  selector: 'app-create-todo',
+  templateUrl: 'create.component.html',
   standalone: true,
-  imports: [],
-  templateUrl: './create.component.html',
-  styleUrl: './create.component.css'
+  imports: [
+    ReactiveFormsModule,
+    NgIf
+  ],
+  styleUrls: ['./create.component.css']
 })
-export class CreateComponent {
+export class CreateTodoComponent {
+  todoForm: FormGroup;
 
+  constructor(private fb: FormBuilder, private todoService: TodoService) {
+    this.todoForm = this.fb.group({
+      name: ['', Validators.required],
+      description: [''],
+      done: [false]
+    });
+  }
+
+  onSubmit() {
+    if (this.todoForm.valid) {
+      const newTodo: Todo = this.todoForm.value;
+      this.todoService.createTodo(newTodo).subscribe({
+        next: () => {
+          console.log('Todo created successfully');
+          this.todoForm.reset({done: false});
+        },
+        error: (error) => console.error('Error creating todo:', error)
+      });
+    }
+  }
 }

@@ -1,6 +1,9 @@
 const TodoData = require('../models/todoData')
 const createTodo = async (req, res) => {
     try {
+        if (!req.body.name) {
+            return res.status(400).json({ message: 'Todo name is required' });
+        }
         const newTodo = new TodoData({
             name: req.body.name,
             description: req.body.description,
