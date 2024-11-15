@@ -1,1 +1,17 @@
-<h1>Home</h1>
+<div class="todoContainer">
+    @if (todos.length > 0) {
+        @for (todo of todos; track $index) {
+            <div class="todo">
+                <h1>{{ todo.name }}</h1>
+                <p>{{ todo.description }}</p>
+                @if (todo.done) {
+                    <p>Done: ✅</p>
+                } @else {
+                    <p>Done :❌</p>
+                }
+            </div>
+        }
+    } @else {
+        <h1>Welcome to my project! </h1>
+    }
+</div>

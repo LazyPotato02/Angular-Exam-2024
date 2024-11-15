@@ -5,15 +5,20 @@ import {Todo} from './todo.types';
 
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root',
 })
 export class TodoService {
-  private apiUrl = 'http://localhost:8000/todo';
+    private apiUrl = 'http://localhost:8000/todo';
 
-  constructor(private http: HttpClient) {
-  }
+    constructor(private http: HttpClient) {
+    }
 
-  createTodo(todo: Todo): Observable<any> {
-    return this.http.post(this.apiUrl, todo, {withCredentials: true});
-  }
+    getTodo(): Observable<any> {
+        return this.http.get(this.apiUrl, {withCredentials: true});
+    }
+
+
+    createTodo(todo: Todo): Observable<any> {
+        return this.http.post(this.apiUrl, todo, {withCredentials: true});
+    }
 }
