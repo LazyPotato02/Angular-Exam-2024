@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {TodoService} from '../todo.service';
 import {Todo} from '../todo.types';
 import {NgIf} from '@angular/common';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-todo',
@@ -17,7 +18,7 @@ import {NgIf} from '@angular/common';
 export class CreateTodoComponent {
   todoForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private todoService: TodoService) {
+  constructor(private fb: FormBuilder, private todoService: TodoService,private router:Router) {
     this.todoForm = this.fb.group({
       name: ['', Validators.required],
       description: [''],
@@ -32,6 +33,7 @@ export class CreateTodoComponent {
         next: () => {
           console.log('Todo created successfully');
           this.todoForm.reset({done: false});
+          this.router.navigate(['/']);
         },
         error: (error) => console.error('Error creating todo:', error)
       });

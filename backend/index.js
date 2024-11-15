@@ -7,6 +7,7 @@ const todoRouter = require("./routes/todoRouter");
 const userRoutes = require("./routes/userRouter");
 const authenticateSession = require('./middlewares/authSession');
 
+// Change the url to the correct for you db
 const url = "mongodb://10.70.71.110:27017/todo-app";
 
 const app = express();
@@ -24,7 +25,7 @@ app.use(cors({
             callback(new Error('Not allowed by CORS'));
         }
     },
-    credentials: true, // Allow credentials (cookies) to be sent
+    credentials: true,
 }));
 
 app.use(express.json());
