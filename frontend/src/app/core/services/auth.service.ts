@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {BehaviorSubject, catchError, map, Observable, of, tap} from 'rxjs';
+import {BehaviorSubject, catchError, map, Observable, of, tap, throwError} from 'rxjs';
 import {Router} from '@angular/router';
 import {LoginData, RegisterData} from './auth.types';
 
@@ -37,12 +37,10 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/users/login`, credentials, { withCredentials: true }).pipe(
       tap(() => {
         this.loggedInSubject.next(true);
-        this.router.navigate(['/']);
       }),
       catchError((error) => {
-        console.error('Login failed:', error);
         this.loggedInSubject.next(false);
-        return of(error);
+        return throwError(() => error);
       })
     );
   }

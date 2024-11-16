@@ -6,15 +6,17 @@ import {LogoutComponent} from './features/auth/components/logout/logout.componen
 import {CreateTodoComponent} from './todo/create/create.component';
 import {EditTodoComponent} from './todo/edit/edit.component';
 import {DeleteTodoComponent} from './todo/delete/delete.component';
+import {NotAuthGuard} from './core/services/guards/not-auth-guard/not-auth-guard.component';
+import {AuthGuard} from './core/services/guards/auth-guard/auth-guard.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
-    {path: 'register', component: RegisterComponent},
-    {path: 'login', component: LoginComponent},
-    {path: 'logout', component: LogoutComponent},
-    {path: 'todos/create', component: CreateTodoComponent},
-    {path: 'todos/edit/:id', component: EditTodoComponent},
-    { path: 'todos/delete/:id', component: DeleteTodoComponent },
+    {path: 'login', component: LoginComponent, canActivate: [NotAuthGuard]},
+    {path: 'register', component: RegisterComponent, canActivate: [NotAuthGuard]},
+    {path: 'logout', component: LogoutComponent, canActivate: [AuthGuard]},
+    {path: 'todos/create', component: CreateTodoComponent, canActivate: [AuthGuard]},
+    {path: 'todos/edit/:id', component: EditTodoComponent, canActivate: [AuthGuard]},
+    {path: 'todos/delete/:id', component: DeleteTodoComponent, canActivate: [AuthGuard]},
     {path: '**', redirectTo: ''},
 ];
 
