@@ -33,7 +33,7 @@ export class LoginComponent {
         if (this.loginForm.valid) {
             this.authService.login(this.loginForm.value).subscribe({
                 next: (response) => {
-                    if (response.status === 200) {
+                    if (response.message === 'Login successful') {
                         this.errorMessage = null;
                         this.router.navigate(['/']);
                     }
