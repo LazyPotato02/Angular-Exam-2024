@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {RouterOutlet} from "@angular/router";
+import {RouterLink, RouterOutlet} from "@angular/router";
 import {Todo} from '../todo/todo.types';
 import {TodoService} from '../todo/todo.service';
 
@@ -7,7 +7,8 @@ import {TodoService} from '../todo/todo.service';
     selector: 'app-home',
     standalone: true,
     imports: [
-        RouterOutlet
+        RouterOutlet,
+        RouterLink
     ],
     templateUrl: './home.component.html',
     styleUrl: './home.component.css'
@@ -23,11 +24,11 @@ export class HomeComponent {
         this.fetchTodos()
     }
 
+
     fetchTodos(): void {
         this.todoService.getTodo().subscribe({
             next: (response) => {
                 this.todos = response
-                console.log(this.todos)
             },
             error: (error) => {
                 if (error.status === 401) {

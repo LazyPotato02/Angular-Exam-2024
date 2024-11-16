@@ -1,0 +1,10 @@
+<div class="delete-container">
+    <h2>Delete Todo</h2>
+    <p *ngIf="todoId">Are you sure you want to delete this Todo?</p>
+    <p *ngIf="!todoId">Invalid Todo ID. Unable to delete.</p>
+    <div class="actions">
+        <button *ngIf="todoId && !isDeleting" (click)="confirmDelete()">Yes, Delete</button>
+        <button *ngIf="!isDeleting" (click)="cancel()">Cancel</button>
+        <p *ngIf="isDeleting">Deleting...</p>
+    </div>
+</div>

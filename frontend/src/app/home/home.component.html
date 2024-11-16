@@ -9,8 +9,10 @@
                 } @else {
                     <p>Done :❌</p>
                 }
-                <button>Edit</button>
-                <button>Delete</button>
+
+                <a class="btn" [routerLink]="['/todos/edit', todo._id]">Edit</a>
+                <a class="btn" [routerLink]="['/todos/delete', todo._id]">Delete</a>
+
             </div>
         }
     } @else {

@@ -1,15 +1,27 @@
-.todoContainer{
+.todoContainer {
     width: 90%;
-    margin:0 auto;
+    margin: 0 auto;
     display: flex;
     flex-direction: row;
     align-items: center;
-    flex-wrap: wrap
+    flex-wrap: wrap;
+
 }
-.todo{
+
+.todo {
     margin: 1rem;
-    border: 1px solid black;
-    width: 18%;
+    width: 15%;
     text-align: center;
     border-radius: 10px;
+    border: 1px solid black;
+    padding: 1rem;
+
+}
+
+.btn {
+    text-decoration: none;
+    color: black;
+    margin-left: 10px;
+    border: 1px solid black;
+    padding: 10px;
 }
