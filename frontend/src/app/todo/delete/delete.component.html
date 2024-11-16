@@ -1,10 +1,19 @@
 <div class="delete-container">
     <h2>Delete Todo</h2>
-    <p *ngIf="todoId">Are you sure you want to delete this Todo?</p>
-    <p *ngIf="!todoId">Invalid Todo ID. Unable to delete.</p>
-    <div class="actions">
-        <button *ngIf="todoId && !isDeleting" (click)="confirmDelete()">Yes, Delete</button>
-        <button *ngIf="!isDeleting" (click)="cancel()">Cancel</button>
+
+    <div  class="todo" *ngIf="todo; else loading">
+        <h3>Name: {{ todo.name }}</h3>
+        <p>Description: {{ todo.description }}</p>
+        <p>Done: {{ todo.done ? '✅' : '❌' }}</p>
+    </div>
+
+    <ng-template #loading>
+        <p>Loading todo details...</p>
+    </ng-template>
+
+    <div *ngIf="todo">
+        <button (click)="confirmDelete()" [disabled]="isDeleting">Yes, Delete</button>
+        <button (click)="cancel()" [disabled]="isDeleting">Cancel</button>
         <p *ngIf="isDeleting">Deleting...</p>
     </div>
 </div>

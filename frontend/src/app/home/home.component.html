@@ -4,11 +4,7 @@
             <div class="todo">
                 <h1>{{ todo.name }}</h1>
                 <p>{{ todo.description }}</p>
-                @if (todo.done) {
-                    <p>Done: ✅</p>
-                } @else {
-                    <p>Done :❌</p>
-                }
+                <p>Done: {{ todo.done ? '✅' : '❌' }}</p>
 
                 <a class="btn" [routerLink]="['/todos/edit', todo._id]">Edit</a>
                 <a class="btn" [routerLink]="['/todos/delete', todo._id]">Delete</a>
