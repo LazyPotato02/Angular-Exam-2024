@@ -10,20 +10,20 @@ COPY frontend/package*.json ./
 # Install dependencies
 RUN npm install
 
-# Copy frontend code to the container
+# Copy Angular source code to the container
 COPY frontend/ .
 
-# Build the Angular app
-RUN npm run build -- --prod
+# Build the Angular app in production mode
+RUN npm run build -- --configuration production
 
-# Serve the app using an Nginx server
+# Use Nginx to serve the built files
 FROM nginx:alpine
 
-# Copy the Angular build files to Nginx
-COPY --from=build /usr/src/app/dist /usr/share/nginx/html
+# Copy built Angular files to Nginx's default public folder
+COPY --from=build /usr/src/app/dist/frontend/browser /usr/share/nginx/html
 
-# Expose port 80
+# Expose port 80 for the application
 EXPOSE 80
 
-# Start Nginx
+# Start Nginx server
 CMD ["nginx", "-g", "daemon off;"]

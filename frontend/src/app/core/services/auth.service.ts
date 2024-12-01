@@ -26,9 +26,9 @@ export class AuthService {
                 this.router.navigate(['/']);
             }),
             catchError((error) => {
-                console.error('Registration failed:', error);
+                // console.error('Registration failed:', error);
                 this.loggedInSubject.next(false);
-                return of(error);
+                return throwError(() => error);
             })
         );
     }

@@ -1,17 +1,17 @@
-docker-compose.ymlversion: "3.9"
+version: "3.9"
 services:
   backend:
     build:
       context: .
       dockerfile: backend/Dockerfile
     ports:
-      - "3000:3000"
+      - "8000:8000"
     volumes:
       - ./backend:/usr/src/app
     depends_on:
       - mongo
     environment:
-      - MONGO_URI=mongodb://mongo:27017/todo_app
+      - MONGO_URI=mongodb://mongo:27017/todo-app
 
   frontend:
     build:
@@ -29,6 +29,8 @@ services:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: todo-app
 
 volumes:
   mongo_data:

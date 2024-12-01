@@ -41,6 +41,13 @@ a{
     text-decoration: none;
     color: #4cae4c;
 }
+
+.error-message{
+    color: red;
+    font-weight: bold;
+}
+
+
 /* Button Styling */
 button[type="submit"] {
   width: 100%;

@@ -88,7 +88,7 @@ frontend/
 
 2. Build and start the Docker containers:
    ```bash
-   docker-compose up --build
+   docker-compose up --build -d
    ```
 
 3. Access the application in your browser:

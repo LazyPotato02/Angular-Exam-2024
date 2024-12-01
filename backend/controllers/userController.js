@@ -43,27 +43,31 @@ async function getUser(req, res) {
 
 const registerUser = async (req, res) => {
     let {email, firstName, lastName, password} = req.body;
-    const hashedPassword = await hashPassword(password);
-    const user = new User({email, firstName, lastName, password: hashedPassword});
 
     try {
+        const existingUser = await User.findOne({email});
+        if (existingUser) {
+            return res.status(400).json({message: 'Email is already registered'});
+        }
+        const hashedPassword = await hashPassword(password);
+
+        const user = new User({email, firstName, lastName, password: hashedPassword});
         const savedUser = await user.save();
 
         const sessionId = generateSessionId();
         const session = new Session({userId: savedUser._id, sessionId});
         await session.save();
 
-
         res.cookie('session-id', sessionId, {
             httpOnly: true,
-            secure: false, // Change to true if you are using HTTPS in production
+            secure: false,
             sameSite: 'Strict',
             maxAge: 24 * 60 * 60 * 1000,
         });
 
         res.status(201).json({message: 'User registered successfully'});
     } catch (error) {
-        res.status(400).json({message: error.message});
+        res.status(500).json({message: 'An error occurred during registration'});
     }
 };
 
@@ -98,23 +102,23 @@ const loginUser = async (req, res) => {
         res.status(500).json({message: error.message});
     }
 };
-const checkSession = async (req,res) =>{
+const checkSession = async (req, res) => {
     if (req.cookies['session-id']) {
         const sessionIsValid = true;
 
         if (sessionIsValid) {
-            return res.status(200).json({ loggedIn: true });
+            return res.status(200).json({loggedIn: true});
         }
     }
-    return res.status(200).json({ loggedIn: false });
+    return res.status(200).json({loggedIn: false});
 }
 const logoutUser = async (req, res) => {
     const sessionId = req.cookies['session-id']
 
-    if (!sessionId) return res.status(401).json({ message: 'Session ID required' });
+    if (!sessionId) return res.status(401).json({message: 'Session ID required'});
 
     try {
-        await Session.deleteOne({ sessionId });
+        await Session.deleteOne({sessionId});
 
         res.clearCookie('session-id', {
             httpOnly: true,
@@ -122,9 +126,9 @@ const logoutUser = async (req, res) => {
             sameSite: 'Strict',
         });
 
-        res.status(200).json({ message: 'Logged out successfully' });
+        res.status(200).json({message: 'Logged out successfully'});
     } catch (error) {
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({message: 'Server error'});
     }
 };
 
