@@ -37,13 +37,18 @@ export class EditTodoComponent implements OnInit {
         this.todoId = this.route.snapshot.paramMap.get('id');
         if (this.todoId) {
             this.todoService.getTodoById(this.todoId).subscribe({
-                next: (todo: Todo) => {
-                    this.todoForm.patchValue(todo);
+                next: (todo: Todo | null) => {
+                    if (todo) {
+                        this.todoForm.patchValue(todo);
+                    } else {
+                        console.warn('Todo not found or unauthorized.');
+                        this.router.navigate(['/']);
+                    }
                     this.isLoading = false;
                 },
                 error: (err) => {
                     console.error('Error fetching todo:', err);
-                    this.isLoading = false;
+                    this.router.navigate(['/']);
                 }
             });
         } else {
