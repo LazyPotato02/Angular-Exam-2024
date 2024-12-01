@@ -10,13 +10,15 @@ import {NotAuthGuard} from './core/services/guards/not-auth-guard/not-auth-guard
 import {AuthGuard} from './core/services/guards/auth-guard/auth-guard.component';
 import {NotFoundComponent} from './not-found/not-found.component';
 import {AboutComponent} from './about/about.component';
+import {BenefitsComponent} from './benefits/benefits.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'login', component: LoginComponent, canActivate: [NotAuthGuard]},
     {path: 'register', component: RegisterComponent, canActivate: [NotAuthGuard]},
     {path: 'logout', component: LogoutComponent, canActivate: [AuthGuard]},
-    { path: 'about', component: AboutComponent, canActivate: [NotAuthGuard] },
+    {path: 'about', component: AboutComponent, canActivate: [NotAuthGuard]},
+    {path: 'benefits', component: BenefitsComponent, canActivate: [NotAuthGuard]},
     {path: 'todos/create', component: CreateTodoComponent, canActivate: [AuthGuard]},
     {path: 'todos/edit/:id', component: EditTodoComponent, canActivate: [AuthGuard]},
     {path: 'todos/delete/:id', component: DeleteTodoComponent, canActivate: [AuthGuard]},
