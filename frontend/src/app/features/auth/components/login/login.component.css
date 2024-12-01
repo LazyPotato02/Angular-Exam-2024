@@ -1,40 +1,48 @@
 .login-container {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 2rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  font-family: Arial, sans-serif;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+}
+h2 {
+    color: #007bff;
+}
+
+a {
+    text-decoration: none;
+    color: #4cae4c;
 }
 
 .form-group {
-  margin-bottom: 1rem;
+    margin-bottom: 1rem;
 }
 
 label {
-  display: block;
-  margin-bottom: 0.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
 }
 
 input {
-  width: 100%;
-  padding: 0.5rem;
-  margin-top: 0.25rem;
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.25rem;
 }
 
 button {
-  width: 100%;
-  padding: 0.75rem;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 button[disabled] {
-  background-color: #ccc;
+    background-color: #ccc;
 }
 
 .error-message {

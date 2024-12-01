@@ -88,7 +88,7 @@ const loginUser = async (req, res) => {
 
         res.cookie('session-id', sessionId, {
             httpOnly: true,
-            secure: false, // Change to true if you are using HTTPS in production
+            secure: false,
             sameSite: 'Strict',
             maxAge: 24 * 60 * 60 * 1000,
         });
@@ -100,8 +100,7 @@ const loginUser = async (req, res) => {
 };
 const checkSession = async (req,res) =>{
     if (req.cookies['session-id']) {
-        // Here, you would typically check if the session is valid, e.g., by querying your session store
-        const sessionIsValid = true; // Replace with actual session validation logic
+        const sessionIsValid = true;
 
         if (sessionIsValid) {
             return res.status(200).json({ loggedIn: true });
@@ -119,7 +118,7 @@ const logoutUser = async (req, res) => {
 
         res.clearCookie('session-id', {
             httpOnly: true,
-            secure: false, // Required for SameSite=None; ensure HTTPS in production
+            secure: false,
             sameSite: 'Strict',
         });
 

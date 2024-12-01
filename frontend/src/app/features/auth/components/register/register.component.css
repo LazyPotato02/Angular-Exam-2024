@@ -28,14 +28,19 @@ input {
   box-sizing: border-box;
   font-size: 14px;
 }
-
+h2 {
+    color: #007bff;
+}
 /* Error Message Styling */
 div[ngIf] {
   color: #d9534f;
   font-size: 12px;
   margin-bottom: 10px;
 }
-
+a{
+    text-decoration: none;
+    color: #4cae4c;
+}
 /* Button Styling */
 button[type="submit"] {
   width: 100%;

@@ -8,16 +8,19 @@ import {EditTodoComponent} from './todo/edit/edit.component';
 import {DeleteTodoComponent} from './todo/delete/delete.component';
 import {NotAuthGuard} from './core/services/guards/not-auth-guard/not-auth-guard.component';
 import {AuthGuard} from './core/services/guards/auth-guard/auth-guard.component';
+import {NotFoundComponent} from './not-found/not-found.component';
+import {AboutComponent} from './about/about.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'login', component: LoginComponent, canActivate: [NotAuthGuard]},
     {path: 'register', component: RegisterComponent, canActivate: [NotAuthGuard]},
     {path: 'logout', component: LogoutComponent, canActivate: [AuthGuard]},
+    { path: 'about', component: AboutComponent, canActivate: [NotAuthGuard] },
     {path: 'todos/create', component: CreateTodoComponent, canActivate: [AuthGuard]},
     {path: 'todos/edit/:id', component: EditTodoComponent, canActivate: [AuthGuard]},
     {path: 'todos/delete/:id', component: DeleteTodoComponent, canActivate: [AuthGuard]},
-    {path: '**', redirectTo: ''},
+    {path: '**', component: NotFoundComponent, canActivate: [NotAuthGuard]},
 ];
 
 

@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {NgIf} from '@angular/common';
 import {AuthService} from '../../../../core/services/auth.service';
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 
 @Component({
     selector: 'app-login',
@@ -10,7 +10,8 @@ import {Router} from '@angular/router';
     styleUrls: ['./login.component.css'],
     imports: [
         ReactiveFormsModule,
-        NgIf
+        NgIf,
+        RouterLink
     ],
     standalone: true
 })
