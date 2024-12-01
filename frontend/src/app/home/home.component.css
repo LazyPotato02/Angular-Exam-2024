@@ -20,8 +20,25 @@
 
 .btn {
     text-decoration: none;
+    border-radius: 10px;
     color: black;
     margin-left: 10px;
     border: 1px solid black;
-    padding: 10px;
+    padding: 10px 20px;
 }
+
+.notLogged {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 80px auto;
+    text-align: center;
+    padding: 20px;
+}
+
+.notLogged img {
+    width: 150px;
+}
+

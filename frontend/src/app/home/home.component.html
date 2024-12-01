@@ -7,11 +7,18 @@
                 <p>Done: {{ todo.done ? '✅' : '❌' }}</p>
 
                 <a class="btn" [routerLink]="['/todos/edit', todo._id]">Edit</a>
-                <a class="btn" [routerLink]="['/todos/delete', todo._id]">Delete</a>
+                <a class="btn" [routerLink]="['/todos/delete']" [queryParams]="{ id: todo._id }">Delete</a>
+
 
             </div>
         }
     } @else {
-        <h1>Welcome to my project! </h1>
+        <div class="notLogged" >
+            <img src="icon.png" alt="website icon">
+            <h1>Welcome to TodoMaster!</h1>
+            <p>Your ultimate tool for managing tasks and boosting productivity.</p>
+            <a routerLink="/register" class="btn">Get Started</a>
+            <p>Already have an account? <a routerLink="/login">Log In</a></p>
+        </div>
     }
 </div>

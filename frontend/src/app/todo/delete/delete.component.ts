@@ -1,22 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TodoService } from '../todo.service';
-import {NgIf} from '@angular/common';
-import {Todo} from '../todo.types';
+import { NgIf } from '@angular/common';
+import { Todo } from '../todo.types';
 
 @Component({
     selector: 'app-delete-todo',
     templateUrl: './delete.component.html',
     standalone: true,
-    imports: [
-        NgIf
-    ],
+    imports: [NgIf],
     styleUrls: ['./delete.component.css']
 })
 export class DeleteTodoComponent implements OnInit {
     todoId: string | null = null;
     isDeleting: boolean = false;
-    todo: Todo | null = null
+    todo: Todo | null = null;
+
     constructor(
         private route: ActivatedRoute,
         private router: Router,
@@ -24,22 +23,25 @@ export class DeleteTodoComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.todoId = this.route.snapshot.paramMap.get('id');
+        // Access query parameters instead of route parameters
+        this.route.queryParamMap.subscribe((params) => {
+            this.todoId = params.get('id');
 
-        if (this.todoId) {
-            this.todoService.getTodoById(this.todoId).subscribe({
-                next: (todo) => {
-                    this.todo = todo;
-                },
-                error: (err) => {
-                    console.error('Error fetching todo:', err);
-                    this.router.navigate(['/']);
-                }
-            });
-        } else {
-            console.error('Todo ID is missing');
-            this.router.navigate(['/']);
-        }
+            if (this.todoId) {
+                this.todoService.getTodoById(this.todoId).subscribe({
+                    next: (todo) => {
+                        this.todo = todo;
+                    },
+                    error: (err) => {
+                        console.error('Error fetching todo:', err);
+                        this.router.navigate(['/']);
+                    }
+                });
+            } else {
+                console.error('Todo ID is missing in query parameters');
+                this.router.navigate(['/']);
+            }
+        });
     }
 
     confirmDelete(): void {

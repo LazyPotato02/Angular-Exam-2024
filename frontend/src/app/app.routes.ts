@@ -17,12 +17,12 @@ export const routes: Routes = [
     {path: 'login', component: LoginComponent, canActivate: [NotAuthGuard]},
     {path: 'register', component: RegisterComponent, canActivate: [NotAuthGuard]},
     {path: 'logout', component: LogoutComponent, canActivate: [AuthGuard]},
-    {path: 'about', component: AboutComponent, canActivate: [NotAuthGuard]},
-    {path: 'benefits', component: BenefitsComponent, canActivate: [NotAuthGuard]},
+    {path: 'about', component: AboutComponent},
+    {path: 'benefits', component: BenefitsComponent},
     {path: 'todos/create', component: CreateTodoComponent, canActivate: [AuthGuard]},
     {path: 'todos/edit/:id', component: EditTodoComponent, canActivate: [AuthGuard]},
-    {path: 'todos/delete/:id', component: DeleteTodoComponent, canActivate: [AuthGuard]},
-    {path: '**', component: NotFoundComponent, canActivate: [NotAuthGuard]},
+    {path: 'todos/delete', component: DeleteTodoComponent, canActivate: [AuthGuard]},
+    {path: '**', component: NotFoundComponent},
 ];
 
 
