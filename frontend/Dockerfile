@@ -5,13 +5,13 @@ FROM node:18 as build
 WORKDIR /usr/src/app
 
 # Copy package.json and package-lock.json
-COPY frontend/package*.json ./
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
 # Copy Angular source code to the container
-COPY frontend/ .
+COPY . .
 
 # Build the Angular app in production mode
 RUN npm run build -- --configuration production

@@ -2,8 +2,8 @@ version: "3.9"
 services:
   backend:
     build:
-      context: .
-      dockerfile: backend/Dockerfile
+      context: ./backend
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
     volumes:
@@ -12,15 +12,31 @@ services:
       - mongo
     environment:
       - MONGO_URI=mongodb://mongo:27017/todo-app
+    deploy:
+      resources:
+        limits:
+          memory: 3G
+          cpus: "2.0"
+        reservations:
+          memory: 1G
+          cpus: "1.0"
 
   frontend:
     build:
-      context: .
-      dockerfile: frontend/Dockerfile
+      context: ./frontend
+      dockerfile: Dockerfile
     ports:
       - "4200:80"
     depends_on:
       - backend
+    deploy:
+      resources:
+        limits:
+          memory: 3G
+          cpus: "2.0"
+        reservations:
+          memory: 1G
+          cpus: "1.0"
 
   mongo:
     image: mongo:6
@@ -31,6 +47,14 @@ services:
       - mongo_data:/data/db
     environment:
       MONGO_INITDB_DATABASE: todo-app
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: "1.0"
+        reservations:
+          memory: 512M
+          cpus: "0.5"
 
 volumes:
   mongo_data:

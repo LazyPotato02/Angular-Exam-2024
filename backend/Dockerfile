@@ -1,20 +1,19 @@
-# Backend Dockerfile
 FROM node:18
 
-# Set working directory
+# Set working directory inside the container
 WORKDIR /usr/src/app
 
 # Copy package.json and package-lock.json
-COPY backend/package*.json ./
+COPY package.json package-lock.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy backend code to the container
-COPY backend/ .
+# Copy the entire backend code into the container
+COPY . .
 
-# Expose the port the backend runs on (e.g., 3000)
-EXPOSE 8000
+# Expose the backend port
+EXPOSE 7000
 
 # Start the backend server
-CMD ["npm", "start"]
+CMD ["node", "index.js"]

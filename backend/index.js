@@ -8,7 +8,8 @@ const userRoutes = require("./routes/userRouter");
 const authenticateSession = require('./middlewares/authSession');
 
 // Change the url to the correct for you db
-const url = "mongodb://10.70.71.110:27017/todo-app";
+const url = process.env.MONGO_URI || "mongodb://localhost:27017/todo-app";
+
 
 const app = express();
 
