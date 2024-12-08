@@ -5,6 +5,7 @@
 This is a full-stack Todo application designed for managing daily tasks. The application supports user authentication and CRUD operations for Todos, with a focus on simplicity and responsiveness.
 
 ---
+## Live demo: http://homeserver1122.tplinkdns.com:4200/
 
 ## Features
 ### General
@@ -76,30 +77,73 @@ frontend/
 - Angular CLI
 
 
-# Steps to Run Todo Application with Docker
 
-## Steps
+# Project Setup Guide
 
-1. Clone the repository:
+## Steps to Run the Project
+
+### Option 1: Run Using Docker
+
+1. **Clone the Repository**:
    ```bash
    git clone <repository-url>
    cd <repository-folder>
    ```
 
-2. Build and start the Docker containers:
+2. **Build and Start the Docker Containers**:
    ```bash
    docker-compose up --build -d
    ```
 
-3. Access the application in your browser:
-   - Frontend: [http://localhost:4200](http://localhost:4200)
-   - Backend: [http://localhost:3000](http://localhost:3000)
-   - MongoDB: `mongodb://localhost:27017`
+3. **Access the Application**:
+   - **Frontend**: [http://localhost:4200](http://localhost:4200)
+   - **Backend**: [http://localhost:8000](http://localhost:8000)
+   - **MongoDB**: `mongodb://localhost:27017`
 
-4. Stop the containers when done:
+4. **Stop the Containers When Done**:
    ```bash
    docker-compose down
    ```
+
+---
+
+### Option 2: Run Without Docker
+
+1. **Clone the Repository**:
+   ```bash
+   git clone <repository-url>
+   cd <repository-folder>
+   ```
+
+2. **Start the Backend**:
+   - Navigate to the backend folder:
+     ```bash
+     cd backend
+     ```
+   - Install dependencies and start the server:
+     ```bash
+     npm install
+     npm start
+     ```
+
+3. **Start the Frontend**:
+   - Open a new terminal and navigate to the frontend folder:
+     ```bash
+     cd frontend
+     ```
+   - Install dependencies and start the application:
+     ```bash
+     npm install
+     ng serve
+     ```
+
+4. **Set Up MongoDB**:
+   - Ensure MongoDB is installed and running on your local machine.
+   - Default connection URL: `mongodb://localhost:27017`
+
+5. **Access the Application**:
+   - **Frontend**: [http://localhost:4200](http://localhost:4200)
+   - **Backend**: [http://localhost:8000](http://localhost:8000)
 
 ---
 
