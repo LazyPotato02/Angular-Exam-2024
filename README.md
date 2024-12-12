@@ -120,12 +120,15 @@ frontend/
      ```bash
      cd backend
      ```
+
+   -Change the db ip adress in index.js to your db ip adress
+
    - Install dependencies and start the server:
      ```bash
      npm install
      npm start
      ```
-
+  
 3. **Start the Frontend**:
    - Open a new terminal and navigate to the frontend folder:
      ```bash
