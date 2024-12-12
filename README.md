@@ -121,7 +121,7 @@ frontend/
      cd backend
      ```
 
-   -Change the db ip adress in index.js to your db ip adress
+   - Change the db ip adress in index.js to your db ip adress
 
    - Install dependencies and start the server:
      ```bash
